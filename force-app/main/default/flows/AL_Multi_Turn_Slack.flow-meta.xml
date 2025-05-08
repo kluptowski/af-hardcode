@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Output</name>
+        <label>Assign Output</label>
+        <locationX>842</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>vAgentOutput</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>I&apos;m sorry, I couldn&apos;t understand that. Try again. </stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Output1</name>
+        <label>Assign Output1</label>
+        <locationX>50</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>vAgentOutput</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ttAnswerForKeyword1</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Output2</name>
+        <label>Assign Output2</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>vAgentOutput</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ttAnswerForKeyword2</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Assign_Output3</name>
+        <label>Assign Output3</label>
+        <locationX>578</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>vAgentOutput</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ttAnswerForKeyword3</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Evaluates which question was asked to the agent so that way it can respond accordingly</description>
+        <name>Which_path</name>
+        <label>Which path?</label>
+        <locationX>446</locationX>
+        <locationY>134</locationY>
+        <defaultConnector>
+            <targetReference>Assign_Output</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>None Found</defaultConnectorLabel>
+        <rules>
+            <name>Keyword1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>inputKeywordTrigger</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>keyword</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Output1</targetReference>
+            </connector>
+            <label>Keyword1</label>
+        </rules>
+        <rules>
+            <name>Keyword2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>inputKeywordTrigger</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>buzzword</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Output2</targetReference>
+            </connector>
+            <label>Keyword2</label>
+        </rules>
+        <rules>
+            <name>Keyword3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>inputKeywordTrigger</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>identifier</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Output3</targetReference>
+            </connector>
+            <label>Keyword3</label>
+        </rules>
+    </decisions>
+    <description>Interprets questions from the running user and evaluates a decision element to determine which way for the agent to respond</description>
+    <environments>Default</environments>
+    <interviewLabel>AL Multi-Turn Slack {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>AL Multi-Turn Slack</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>320</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Which_path</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>ttAnswerForKeyword1</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Got it. I went ahead and created &lt;https://slack-demo-11310.enterprise.slack.com/docs/T06HBLLBAVD/F08R4F6D086|that canvas for you&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttAnswerForKeyword2</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Here is the answer because you said buzzword. Also, a url to a salesforce record: https://storm-e1f5174f48e055.lightning.force.com/lightning/r/Account/001Hs00003YkH7RIAV/view</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttAnswerForKeyword3</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Here is the answer because you wrote identifier. And some formatting:
+*Bold*
+_italics_ \n
+- Detective Chimp\n- Bouncing Boy\n- Aqualad
+```This is a code block\nAnd it&apos;s multi-line```
+This is a sentence with some `inline *code*` in it.
+This is unquoted text\n&gt;This is quoted text\n&gt;This is still quoted text\nThis is unquoted text again
+:joy:
+&lt;#C08R08BLGKG&gt;</text>
+    </textTemplates>
+    <variables>
+        <description>Takes the entire question that came from the user in the agent interaction</description>
+        <name>inputKeywordTrigger</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>vAgentOutput</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

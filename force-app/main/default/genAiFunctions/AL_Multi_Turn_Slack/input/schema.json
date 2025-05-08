@@ -1,0 +1,14 @@
+{
+  "required" : [ "inputKeywordTrigger" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "inputKeywordTrigger" : {
+      "title" : "inputKeywordTrigger",
+      "description" : "Takes the entire question that came from the user in the agent interaction",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
