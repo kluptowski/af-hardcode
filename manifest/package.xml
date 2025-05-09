@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>AL_Multi_Turn_Slack</members>
+		<members>Demo_Custom_Object__c</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
+        <members>Demo_Custom_Object__c.Agent_Response_RTF__c</members>
+        <members>Demo_Custom_Object__c.Keyword_for_Trigger__c</members>
+        <name>CustomField</name>
+    </types>
+	<types>
+		<members>Demo_Custom_Object__c</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>Demo_Custom_Object_Record_Page</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>AL_Multi_Turn_Agent_for_Slack</members>
 		<name>Flow</name>
 	</types>
 	<types>
-		<members>AL_Multi_Turn_Slack</members>
+		<members>AL_Multi_Turn_Agent_for_Slack</members>
 		<name>GenAiFunction</name>
 	</types>
 	<types>
-		<members>Keyword_Inquiry_Handling</members>
-		<name>GenAiPlugin</name>
+		<members>Demo_Custom_Object__c-Demo Custom Object Layout</members>
+		<name>Layout</name>
+	</types>
+	<types>
+		<members>Demo_Custom_Object__c.All</members>
+		<name>ListView</name>
+	</types>
+	<types>
+		<members>zDemo_Custom_Object_Helper_Access</members>
+		<name>PermissionSet</name>
+	</types>
+	<types>
+		<members>Admin</members>
+		<name>Profile</name>
 	</types>
 	<version>63.0</version>
 </Package>

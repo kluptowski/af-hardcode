@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agent_Response_RTF__c</fullName>
+    <description>For multi-turn agent responses. Allows for formatting. Reference https://api.slack.com/reference/surfaces/formatting</description>
+    <inlineHelpText>Do not include images. You can use markdown: https://api.slack.com/reference/surfaces/formatting. For links to salesforce, use either the hyperlink button or markdown. For a link to a canvas in slack, you can just paste the url directly as text.</inlineHelpText>
+    <label>Agent Response (RTF)</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

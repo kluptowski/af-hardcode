@@ -1,9 +1,9 @@
 {
   "unevaluatedProperties" : false,
   "properties" : {
-    "vAgentOutput" : {
-      "title" : "vAgentOutput",
-      "description" : "Output text that the agent should respond with ",
+    "vOutputAgentResponse" : {
+      "title" : "vOutputAgentResponse",
+      "description" : "Text that the agent should respond with",
       "lightning:type" : "lightning__textType",
       "lightning:isPII" : false,
       "copilotAction:isDisplayable" : true,

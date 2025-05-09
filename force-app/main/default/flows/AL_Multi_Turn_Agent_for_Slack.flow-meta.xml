@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Give the stored answer back to agentforce</description>
+        <name>Assign_Answer_to_Output</name>
+        <label>Assign Answer to Output</label>
+        <locationX>902</locationX>
+        <locationY>617</locationY>
+        <assignmentItems>
+            <assignToReference>vOutputAgentResponse</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_thru_the_records.Agent_Response_RTF__c</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Give the fallback answer back to agentforce</description>
+        <name>Assign_Fallback_to_Output</name>
+        <label>Assign Fallback to Output</label>
+        <locationX>547</locationX>
+        <locationY>619</locationY>
+        <assignmentItems>
+            <assignToReference>vOutputAgentResponse</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>I&apos;m sorry. I had trouble finding an answer to that question. Could you please try again. </stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>This finds which record of the custom object that we care about</description>
+        <name>Contains_the_Keyword</name>
+        <label>Contains the Keyword?</label>
+        <locationX>896</locationX>
+        <locationY>363</locationY>
+        <defaultConnector>
+            <targetReference>Loop_thru_the_records</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Matching_Keyword</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>vInputQuestionFromAgentforce</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>Loop_thru_the_records.Keyword_for_Trigger__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Answer_to_Output</targetReference>
+            </connector>
+            <label>Matching Keyword</label>
+        </rules>
+    </decisions>
+    <description>Accepts a string of text from the agent interaction and returns an output text variable to be displayed to the end user.</description>
+    <environments>Default</environments>
+    <interviewLabel>AL Multi Turn Agent for Slack {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>AL Multi Turn Agent for Slack</label>
+    <loops>
+        <name>Loop_thru_the_records</name>
+        <label>Loop thru the records</label>
+        <locationX>550</locationX>
+        <locationY>388</locationY>
+        <collectionReference>Find_Matching_Demo_Helper_Record</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Contains_the_Keyword</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Assign_Fallback_to_Output</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Looks for the demo custom object record that matches this keyword</description>
+        <name>Find_Matching_Demo_Helper_Record</name>
+        <label>Find Matching Demo Helper Record</label>
+        <locationX>552</locationX>
+        <locationY>207</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_thru_the_records</targetReference>
+        </connector>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Demo_Custom_Object__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>465</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Find_Matching_Demo_Helper_Record</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>This is the question that the end user asks the agent in agentforce. Value passed in from agentforce interaction.</description>
+        <name>vInputQuestionFromAgentforce</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Text that the agent should respond with</description>
+        <name>vOutputAgentResponse</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

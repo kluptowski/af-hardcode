@@ -1,0 +1,14 @@
+{
+  "required" : [ "vInputQuestionFromAgentforce" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "vInputQuestionFromAgentforce" : {
+      "title" : "vInputQuestionFromAgentforce",
+      "description" : "This is the question that the end user asks the agent in agentforce. Value passed in from agentforce interaction.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
